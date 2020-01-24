@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const db = require('../models');
 
 exports.register = async (req, res, next) => {
@@ -6,9 +8,19 @@ exports.register = async (req, res, next) => {
     const user = await db.User.create(req.body);
     const { id, username } = user;
 
+    // Create a JWT
+    const token = jwt.sign({ id, username }, process.env.SECRET);
+
     // What the user gets back from the post request
-    res.json({id, username});
+    res.status(201).json({
+      id, 
+      username, 
+      token 
+    }); // 201 means a record was created
   } catch (error) {
+    if(error.code === 11000) { // MongoDb error code
+      error.message = 'Sorry, that username is already taken';
+    }
     next(error);
   }
 }
@@ -20,14 +32,19 @@ exports.login = async (req, res, next) => {
     const valid = await user.comparePassword(req.body.password);
 
     if(valid) {
+
+      // Create a JWT
+      const token = jwt.sign({ id, username }, process.env.SECRET);
       res.json({
         id,
-        username
+        username,
+        token
       });
     } else {
-      throw new Error('Invalid Username/Password');
+      throw new Error();
     }
   } catch (error) {
+    error.message = 'Invalid Username/Password';
     next(error);
   }
 }
