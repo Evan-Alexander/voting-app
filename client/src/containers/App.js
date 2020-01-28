@@ -1,11 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import decode from "jwt-decode";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { setCurrentUser, addError, setToken } from "../store/actions";
 
-import Auth from "../components/Auth";
-import ErrorMessage from "../components/ErrorMessage";
+// import Auth from "../components/Auth";
+// import ErrorMessage from "../components/ErrorMessage";
+import NavBar from "../containers/Navbar";
+import RouteViews from "../containers/RouteViews";
 
 // Check if the user is authenticated before the application opens
 if (localStorage.jwtToken) {
@@ -20,8 +23,12 @@ if (localStorage.jwtToken) {
 
 const App = () => (
   <Provider store={store}>
-    <Auth authType={"login"} />
-    <ErrorMessage />
+    <Fragment>
+      <BrowserRouter>
+        <NavBar />
+        <RouteViews />
+      </BrowserRouter>
+    </Fragment>
   </Provider>
 );
 
