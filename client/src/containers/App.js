@@ -4,6 +4,9 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 import { setCurrentUser, addError, setToken } from "../store/actions";
 
+import Auth from "../components/Auth";
+import ErrorMessage from "../components/ErrorMessage";
+
 // Check if the user is authenticated before the application opens
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);
@@ -17,7 +20,8 @@ if (localStorage.jwtToken) {
 
 const App = () => (
   <Provider store={store}>
-    <div>App works, por supuesto!</div>
+    <Auth authType={"login"} />
+    <ErrorMessage />
   </Provider>
 );
 
