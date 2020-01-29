@@ -12,19 +12,15 @@ const Navbar = ({ auth, logout }) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {!auth.isAuthenticated && (
-          <Fragment>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/test">Test</Link>
-            </li>
-          </Fragment>
-        )}
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/test">Test</Link>
+        </li>
         <li>
           <button onClick={logout}>Logout</button>
         </li>

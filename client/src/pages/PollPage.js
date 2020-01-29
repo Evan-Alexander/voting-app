@@ -1,8 +1,11 @@
 import React from "react";
+
 import Poll from "../components/Poll";
 import ErrorMessage from "../components/ErrorMessage";
 
-const TestPage = () => {
+const PollPage = ({ match, getPoll }) => {
+  getPoll(match.params.id);
+
   return (
     <div>
       <ErrorMessage />
@@ -11,4 +14,4 @@ const TestPage = () => {
   );
 };
 
-export default TestPage;
+export default PollPage;
