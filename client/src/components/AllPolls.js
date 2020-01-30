@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { getPolls, getUserPolls, getCurrentPoll } from "../store/actions";
 
 export class AllPolls extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     const { getPolls } = this.props;
@@ -23,7 +23,7 @@ export class AllPolls extends Component {
 
     const polls = this.props.polls.map(poll => (
       <li onClick={() => this.handleSelect(poll._id)} key={poll._id}>
-        {poll.question}
+        <span>{poll.question}</span>
       </li>
     ));
     return (
@@ -33,9 +33,9 @@ export class AllPolls extends Component {
             <div>
               <button onClick={getPolls}>All polls</button>
             </div>
-            <div>
+            {/* <div>
               <button onClick={getUserPolls}>My polls</button>
-            </div>
+            </div> */}
           </div>
         )}
         <ul>{polls}</ul>

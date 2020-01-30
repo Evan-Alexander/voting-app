@@ -36,11 +36,11 @@ const Poll = ({ poll, vote }) => {
       }
     ]
   };
-
+  console.log(poll._id);
   return (
-    <div>
+    <div key={poll._id}>
       <h3>{poll.question}</h3>
-      <div>{answers}</div>
+      <div className="button-group">{answers}</div>
       {poll.options && <Pie data={data} />}
     </div>
   );
